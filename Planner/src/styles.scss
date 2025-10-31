@@ -1,0 +1,70 @@
+@use "tailwindcss" as *;
+
+// Premium Dark Glossy Palette
+$color-bg: #020409;                // fondo base (casi negro azulado profundo)
+$color-surface: #0C1118;           // capas principales (cards, paneles)
+$color-sidebar: #090D13;           // sidebar aún más oscuro
+$color-card: #111827;              // tarjetas más elevadas
+$color-primary: #7C3AED;           // acento violeta saturado (brillante)
+$color-primary-glow: #A78BFA;      // brillo sutil para hover, bordes activos
+$color-secondary: #8B5CF6;         // transición luminosa secundaria
+$color-text: #F9FAFB;              // texto blanco puro
+$color-text-secondary: #B4B8C4;    // gris con leve azul
+$color-border: #1E2230;            // bordes más oscuros, definidos
+$color-footer: #090D13;            // coherente con sidebar
+
+// Estados (más vivos)
+$color-success: #22C55E;
+$color-danger: #F87171;
+$color-warning: #FACC15;
+$color-info: #3B82F6;
+
+// Categorías para gráficas
+$cat-shopping: #A855F7;
+$cat-food: #FB923C;
+$cat-transport: #34D399;
+$cat-entertainment: #F43F5E;
+$cat-savings: #EAB308;
+$cat-debt: #6366F1;
+$cat-other: #06B6D4;
+
+// Fuente
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+//  Variables globales
+:root {
+  --color-bg: #{$color-bg};
+  --color-surface: #{$color-surface};
+  --color-sidebar: #{$color-sidebar};
+  --color-card: #{$color-card};
+  --color-primary: #{$color-primary};
+  --color-primary-glow: #{$color-primary-glow};
+  --color-secondary: #{$color-secondary};
+  --color-text: #{$color-text};
+  --color-text-secondary: #{$color-text-secondary};
+  --color-border: #{$color-border};
+  --color-footer: #{$color-footer};
+}
+
+body, html {
+  font-family: $font-family;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.card-glow {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  box-shadow:
+    0 0 20px rgba(124, 58, 237, 0.15),
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: 0.3s ease;
+  
+  &:hover {
+    box-shadow:
+      0 0 25px rgba(167, 139, 250, 0.25),
+      inset 0 0 10px rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+}
