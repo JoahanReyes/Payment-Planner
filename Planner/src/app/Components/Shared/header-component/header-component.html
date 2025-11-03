@@ -1,1 +1,79 @@
-<p>header-component works!</p>
+<header
+  class="w-full bg-[var(--color-surface)] border-b border-[var(--color-border)] text-[var(--color-text)] px-6 py-3 flex items-center justify-between shadow-lg"
+>
+  <!-- Left: Logo + Plan -->
+  <div class="flex items-center gap-3">
+    <img
+      src="{{ logo }}"
+      alt="Logo Planner"
+      class="w-10 h-10 object-contain rounded-lg bg-[var(--color-card)] p-1"
+    />
+    <div class="flex flex-col leading-tight">
+      <span class="font-semibold text-lg">Plan Financiero</span>
+    </div>
+  </div>
+
+  <!-- Center: Search Bar -->
+  <div class="flex-1 flex-col max-w-xl mx-8">
+    <div
+      class="relative bg-[var(--color-card)] rounded-xl overflow-hidden flex items-center border border-[var(--color-border)] shadow-inner"
+    >
+      <i
+        class="fa fa-search absolute left-3 text-[var(--color-text-secondary)]"
+      ></i>
+      <input
+        type="text"
+        placeholder="Escribe para buscar..."
+        class="w-full pl-10 pr-4 py-2 bg-transparent outline-none text-[var(--color-text)] placeholder-[var(--color-text-secondary)]"
+      />
+    </div>
+  </div>
+
+  <!-- Right: User Info -->
+  <div class="flex items-center gap-3">
+    @if (user.isLogged == true) {
+    <div class="relative user-menu-toggle" (click)="UserMenuToggle($event)">
+      <div class="flex items-center gap-2 cursor-pointer select-none">
+        <img
+          src=" {{ user.avatarUrl }}"
+          alt="User avatar"
+          class="w-10 h-10 rounded-full object-cover border border-[var(--color-border)]"
+        />
+        <div class="flex flex-col text-sm">
+          <span class="font-medium">{{ user.name }}</span>
+          <span class="text-[var(--color-text-secondary)] text-xs"
+            >Cuenta Personal</span
+          >
+        </div>
+        <i
+          class="fa fa-chevron-down text-[var(--color-text-secondary)] text-sm ml-1"
+          [class.rotate-180]="ismenuopen()"
+        ></i>
+      </div>
+      @if (ismenuopen() == true) {
+      <div
+        class="absolute right-0 mt-3 w-48 bg-[var(--color-card)] border border-[var(--color-border)] rounded-lg shadow-lg overflow-hidden animate-fade-in z-50"
+      >
+        <a
+          routerLink="/Profile"
+          class="block px-4 py-2 text-[var(--color-text)] text-sm hover:bg-[var(--color-surface)] transition-colors"
+          >Perfil</a
+        >
+        <a
+          routerLink="/LogOut"
+          class="block px-4 py-2 text-[var(--color-danger)] text-sm hover:bg-[var(--color-surface)] transition-colors"
+          >Cerrar sesión</a
+        >
+      </div>
+      }
+    </div>
+    } @else {
+    <a
+      class="bg-[var(--color-primary)] text-white px-4 py-2 rounded hover:bg-[var(--color-primary-glow)] transition-colors"
+      routerLink="/Login"
+    >
+      Iniciar Sesión
+    </a>
+    }
+  </div>
+</header>
