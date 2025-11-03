@@ -1,0 +1,17 @@
+li {
+    list-style-type: none;
+}
+a:hover {
+  text-shadow: 0 0 8px var(--color-primary);
+  ::-ms-tooltip {
+    display: flex;
+    align-self: start;
+    text-align: center;
+    color: --var(--color-text);
+  }
+}
+
+.active-link {
+  font-weight: bold;
+  color: var(--color-primary);
+}

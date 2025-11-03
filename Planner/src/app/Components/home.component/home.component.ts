@@ -8,5 +8,7 @@ import Swal from 'sweetalert2';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
+  constructor() {}
+  name: string = 'Joahan';
   ngOnInit(): void {}
 }
