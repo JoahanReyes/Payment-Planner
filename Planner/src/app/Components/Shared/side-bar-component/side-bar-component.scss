@@ -14,4 +14,9 @@ a:hover {
 .active-link {
   font-weight: bold;
   color: var(--color-primary);
+
+  i {
+    color: var(--color-primary) !important;
+    text-shadow: 0 0 8px var(--color-primary);
+  }
 }

@@ -42,6 +42,19 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
   --color-text-secondary: #{$color-text-secondary};
   --color-border: #{$color-border};
   --color-footer: #{$color-footer};
+
+  --color-success: #{$color-success};
+  --color-error: #{$color-danger};
+  --color-warning: #{$color-warning};
+  --color-info: #{$color-info};
+
+  --cat-shopping: #{$cat-shopping};
+  --cat-food: #{$cat-food};
+  --cat-transport: #{$cat-transport};
+  --cat-entertainment: #{$cat-entertainment};
+  --cat-savings: #{$cat-savings};
+  --cat-debt: #{$cat-debt};
+  --cat-other: #{$cat-other};
 }
 
 body, html {
