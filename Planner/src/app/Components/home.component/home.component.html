@@ -140,37 +140,29 @@
   <div
     class="col-span-3 card bg-[var(--color-card)] p-4 m-4 rounded-lg shadow-md border-2 border-[var(--color-primary-glow)]"
   >
-    <h2 class="text-2xl font-semibold mb-2">Próximos Pagos</h2>
-    <!-- Aquí iría la lista de próximos pagos -->
-    <div class="grid grid-cols-12 gap-4">
+    <h2 class="text-2xl font-semibold mb-4 text-[var(--color-text)]">
+      Próximos Pagos
+    </h2>
+
+    <ul class="space-y-4">
       @for (expense of plannedExpenses(); track expense.name) {
-      <div
-        class="col-span-4 card justify-center bg-[var(--color-card)] p-4 m-4 rounded-lg shadow-md border-2"
-        [style.border-color]="
-          expense.name === 'Rent'
-            ? 'var(--cat-food)'
-            : expense.name === 'Transport'
-            ? 'var(--cat-transport)'
-            : expense.name === 'Entertainment'
-            ? 'var(--cat-entertainment)'
-            : 'var(--cat-debt)'
-        "
-      >
+      <li class="flex items-center gap-3 text-[var(--color-text)] text-lg">
         <i
           class="fa"
           [ngClass]="{
             'fa-house text-[var(--cat-food)]': expense.name === 'Renta',
             'fa-bus text-[var(--cat-transport)]': expense.name === 'Transporte',
             'fa-gamepad text-[var(--cat-entertainment)]':
-              expense.name === 'Entretenimiento',
+              expense.name === 'Recreación',
             'fa-credit-card text-[var(--cat-debt)]': expense.name === 'Deudas'
           }"
+          aria-hidden="true"
         ></i>
-        <span class="text-lg font-semibold mt-2">
-          {{ expense.name }}: ${{ expense.amount }}
+        <span>
+          {{ expense.name }}: ${{ expense.amount | number : "1.0-0" }}
         </span>
-      </div>
+      </li>
       }
-    </div>
+    </ul>
   </div>
 </div>

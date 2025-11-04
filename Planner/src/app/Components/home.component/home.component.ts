@@ -65,10 +65,10 @@ export class HomeComponent implements OnInit {
   });
 
   plannedExpenses = signal([
-    { name: 'Renta', amount: 1000 },
-    { name: 'Transporte', amount: 500 },
-    { name: 'Entretenimiento', amount: 300 },
-    { name: 'Deudas', amount: 700 },
+    { name: 'Renta', amount: 1000, date: '2025-11-15' },
+    { name: 'Transporte', amount: 500, date: '2025-11-15' },
+    { name: 'Recreación', amount: 300, date: '2025-11-15' },
+    { name: 'Deudas', amount: 700, date: '2025-11-15' },
   ]);
 
   plannedDebts = signal([
