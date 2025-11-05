@@ -13,20 +13,20 @@
       <i
         class="fa"
         [ngClass]="
-          card.type === 'Income'
-            ? 'fa-solid fa-arrow-up  fa-2x mr-4'
-            : card.type === 'Expenses'
-            ? 'fa-solid fa-arrow-down fa-2x mr-4'
-            : 'fa-solid fa-piggy-bank fa-2x mr-4'
+          card.type === 'Ingresos'
+            ? 'fa-solid fa-arrow-up fa-2x mr-4'
+            : card.type === 'Gastos'
+            ? 'fa-solid fa-arrow-down  fa-2x mr-4'
+            : 'fa-solid fa-piggy-bank  fa-2x mr-4'
         "
       ></i>
       <div>
         <p
           class="text-3xl font-bold"
           [ngClass]="
-            card.type === 'Income'
+            card.type === 'Ingresos'
               ? FinancialBalance().incomeColor()
-              : card.type === 'Expenses'
+              : card.type === 'Gastos'
               ? FinancialBalance().expensesColor()
               : FinancialBalance().savingsColor()
           "
@@ -59,7 +59,7 @@
   <div
     class="col-span-3 card bg-[var(--color-card)] p-4 m-4 rounded-lg shadow-md border-2 border-[var(--color-primary-glow)]"
   >
-    <h2 class="text-2xl font-semibold mb-4">Progreso de Deudas</h2>
+    <h2 class="text-2xl font-semibold mb-4 text-center">Progreso de Deudas</h2>
 
     <!--  Progreso Total -->
     <div class="mb-6">
@@ -138,31 +138,92 @@
   </div>
 
   <div
-    class="col-span-3 card bg-[var(--color-card)] p-4 m-4 rounded-lg shadow-md border-2 border-[var(--color-primary-glow)]"
+    class="col-span-4 card bg-[var(--color-card)] p-4 m-4 rounded-lg shadow-md border-2 border-[var(--color-primary-glow)]"
   >
-    <h2 class="text-2xl font-semibold mb-4 text-[var(--color-text)]">
+    <h2
+      class="text-2xl font-semibold mb-4 text-[var(--color-text)] text-center"
+    >
       Próximos Pagos
     </h2>
 
     <ul class="space-y-4">
       @for (expense of plannedExpenses(); track expense.name) {
-      <li class="flex items-center gap-3 text-[var(--color-text)] text-lg">
-        <i
-          class="fa"
-          [ngClass]="{
-            'fa-house text-[var(--cat-food)]': expense.name === 'Renta',
-            'fa-bus text-[var(--cat-transport)]': expense.name === 'Transporte',
-            'fa-gamepad text-[var(--cat-entertainment)]':
-              expense.name === 'Recreación',
-            'fa-credit-card text-[var(--cat-debt)]': expense.name === 'Deudas'
-          }"
-          aria-hidden="true"
-        ></i>
-        <span>
-          {{ expense.name }}: ${{ expense.amount | number : "1.0-0" }}
-        </span>
+      <li
+        class="flex items-center justify-between p-3 rounded-lg transition-all duration-300 hover:scale-[1.02] bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary-glow)]"
+      >
+        <div class="flex items-center gap-3">
+          <i
+            class="fa text-xl"
+            [ngClass]="{
+              'fa-house text-[var(--color-secondary)]':
+                expense.name === 'Renta',
+              'fa-bus text-[var(--cat-transport)]':
+                expense.name === 'Transporte',
+              'fa-gamepad text-[var(--cat-entertainment)]':
+                expense.name === 'Recreación',
+              'fa-credit-card text-[var(--cat-debt)]': expense.name === 'Deudas'
+            }"
+          ></i>
+
+          <div>
+            <p class="font-semibold">{{ expense.name }}</p>
+            <p class="text-[var(--color-text-secondary)] text-sm">
+              ${{ expense.amount | number : "1.0-0" }}
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="text-right">
+            <span class="text-sm text-[var(--color-text-secondary)] block">
+              {{ expense.dueDate | date : "longDate" }}
+            </span>
+            <span
+              class="text-xs px-3 py-1 rounded-md font-semibold transition-all duration-300"
+              [style.color]="getStatusColor(expense.status)"
+            >
+              {{ expense.status }}
+            </span>
+          </div>
+
+          <!-- Botón tipo checklist -->
+          <button
+            (click)="togglePaymentStatus(expense)"
+            class="w-6 h-6 rounded-md border flex items-center justify-center transition-all duration-300 hover:scale-110"
+            [ngClass]="{
+              'bg-green-500/80 border-green-500 text-white':
+                expense.status === 'Pagado',
+              'border-[var(--color-border)] text-[var(--color-text-secondary)]':
+                expense.status !== 'Pagado'
+            }"
+            [title]="
+              expense.status === 'Pagado'
+                ? 'Marcar como pendiente'
+                : 'Marcar como pagado'
+            "
+          >
+            <i
+              class="fa"
+              [ngClass]="{
+                'fa-check': expense.status === 'Pagado',
+                'fa-circle': expense.status !== 'Pagado'
+              }"
+            ></i>
+          </button>
+        </div>
       </li>
       }
     </ul>
+  </div>
+
+  <div
+    class="col-span-5 card bg-[var(--color-card)] p-4 m-4 rounded-lg shadow-md border-2 border-[var(--color-primary-glow)]"
+  >
+    <h2
+      class="text-2xl font-semibold mb-4 text-[var(--color-text)] text-center"
+    >
+      Distribución de Gastos
+    </h2>
+    <canvas id="expensesPieChart"></canvas>
   </div>
 </div>
